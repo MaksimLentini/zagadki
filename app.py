@@ -126,7 +126,7 @@ def set_security_headers(response):
         "script-src 'self' 'unsafe-inline' https://www.gstatic.com https://www.googletagmanager.com; "
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
         "font-src 'self' https://fonts.gstatic.com; "
-        "connect-src 'self' https://*.firebaseio.com https://arizona-ai.ru; "
+        "connect-src 'self' https://*.firebaseio.com https://*.firebaseapp.com https://arizona-ai.ru https://www.gstatic.com; "
         "img-src 'self' data:; "
         "object-src 'none'; "
         "frame-ancestors 'self';"
@@ -255,12 +255,17 @@ def index():
 @limiter.limit("100 per hour")
 def api_config():
     """Безопасно передаёт Firebase конфиг клиенту."""
-    logger.info("Firebase config requested from " + get_remote_address())
-    
-    if not all([FIREBASE_CONFIG.get(k) for k in ["apiKey", "projectId"]]):
-        return jsonify({"error": "Firebase configuration incomplete"}), 500
-    
-    return jsonify(FIREBASE_CONFIG)
+    try:
+        logger.info("Firebase config requested from " + get_remote_address())
+        
+        if not all([FIREBASE_CONFIG.get(k) for k in ["apiKey", "projectId"]]):
+            logger.error("Firebase configuration incomplete")
+            return jsonify({"error": "Firebase configuration incomplete"}), 500
+        
+        return jsonify(FIREBASE_CONFIG)
+    except Exception as e:
+        logger.error(f"Error in api_config: {e}")
+        return jsonify({"error": "Server error"}), 500
 
 
 @app.route("/api/ai/chat", methods=["POST"])
