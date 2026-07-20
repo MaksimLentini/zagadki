@@ -52,6 +52,11 @@
                 <button class="logout-btn" id="logoutBtn">Выйти</button>
             </div>
 
+            <div class="stats-bar">
+                <button class="stats-btn" id="topPlayersBtn">🏆 Топ игроков</button>
+                <button class="stats-btn" id="topAnswersBtn">📜 Топ ответов</button>
+            </div>
+
             <div class="chats-section" id="chatsSection">
                 <div class="chats-label">
                     <span>Чаты</span>
@@ -107,8 +112,32 @@
         </div>
     </div>
 
+    <!-- ===== МОДАЛКА: ТОП ИГРОКОВ ===== -->
+    <div class="modal-overlay" id="topPlayersModal">
+        <div class="modal-box top-box">
+            <div class="top-box-header">
+                <h3>🏆 Топ игроков</h3>
+                <button class="top-close" id="topPlayersClose">✕</button>
+            </div>
+            <div id="topPlayersList" class="top-list"></div>
+        </div>
+    </div>
+
+    <!-- ===== МОДАЛКА: ТОП ОТВЕТОВ НА ЗАГАДКИ ===== -->
+    <div class="modal-overlay" id="topAnswersModal">
+        <div class="modal-box top-box">
+            <div class="top-box-header">
+                <h3>📜 Топ ответов на загадки</h3>
+                <button class="top-close" id="topAnswersClose">✕</button>
+            </div>
+            <div id="topAnswersList" class="top-list"></div>
+        </div>
+    </div>
+
     <!-- Firebase SDK (модульный, v10) -->
     <script type="module" src="{{ url_for('static', filename='js/firebase-config.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/leaderboard.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/top-answers.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>

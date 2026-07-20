@@ -14,9 +14,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
     getFirestore,
-    doc, getDoc, setDoc, updateDoc,
+    doc, getDoc, setDoc, updateDoc, increment,
     collection, addDoc, query, where, orderBy,
-    onSnapshot, serverTimestamp, limit
+    onSnapshot, getDocs, serverTimestamp, limit
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -37,8 +37,8 @@ const db = getFirestore(app);
 window.fb = {
     auth, db,
     createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile,
-    doc, getDoc, setDoc, updateDoc,
-    collection, addDoc, query, where, orderBy, onSnapshot, serverTimestamp, limit
+    doc, getDoc, setDoc, updateDoc, increment,
+    collection, addDoc, query, where, orderBy, onSnapshot, getDocs, serverTimestamp, limit
 };
 
 // Сигнализируем app.js, что Firebase готов
