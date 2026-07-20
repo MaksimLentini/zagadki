@@ -223,6 +223,15 @@ button { font-family: inherit; }
 }
 .stats-btn:hover { border-color: var(--amber); color: var(--amber); background: rgba(242,165,65,0.06); }
 
+/* Иконки для кнопок */
+.icon {
+    display: inline-flex;
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 4px;
+    vertical-align: -0.2em;
+}
+
 .top-box { max-width: 460px; max-height: 76vh; display: flex; flex-direction: column; }
 .top-box-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .top-box-header h3 { font-family: var(--font-display); font-size: 18px; }
