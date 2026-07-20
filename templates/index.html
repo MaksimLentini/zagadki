@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загадочник — чат с загадками</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- ===== АВТОРИЗАЦИЯ ===== -->
+    <div class="auth-container" id="authContainer">
+        <div class="auth-box">
+            <div class="auth-mark">🔮</div>
+            <h1>Загадочник</h1>
+            <p class="subtitle" id="authSubtitle">Войдите, чтобы начать разгадывать</p>
+
+            <div class="error" id="authError" style="display:none;"></div>
+            <div class="success" id="authSuccess" style="display:none;"></div>
+
+            <input type="text" id="regName" placeholder="Ваше имя" style="display:none;">
+            <input type="email" id="authEmail" placeholder="Email">
+            <input type="password" id="authPassword" placeholder="Пароль">
+
+            <button class="primary" id="authSubmitBtn">Войти</button>
+
+            <div class="switch-mode">
+                <span id="switchText">Нет аккаунта?</span>
+                <a id="switchLink">Зарегистрироваться</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ПРИЛОЖЕНИЕ ===== -->
+    <div class="app-container" id="appContainer">
+
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="auth-mark">🔮</div>
+                <div>
+                    <h1>Загадочник</h1>
+                    <div class="status">в сети</div>
+                </div>
+            </div>
+
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">?</div>
+                <div class="user-details">
+                    <div class="user-name" id="displayName">—</div>
+                    <div class="user-email" id="displayEmail">—</div>
+                </div>
+                <button class="logout-btn" id="logoutBtn">Выйти</button>
+            </div>
+
+            <div class="chats-section" id="chatsSection">
+                <div class="chats-label">
+                    <span>Чаты</span>
+                    <button class="new-chat-btn" id="newChatBtn">+ Новый</button>
+                </div>
+                <div id="chatsList"><!-- рендерится через JS --></div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="chat-header" id="chatHeader" style="display:none;">
+                <div class="ch-avatar" id="chHeaderAvatar">?</div>
+                <div>
+                    <div class="ch-title" id="chHeaderTitle">—</div>
+                    <div class="ch-sub" id="chHeaderSub">—</div>
+                </div>
+            </div>
+
+            <div class="empty-state" id="emptyState">
+                <div class="es-icon">🕯️</div>
+                <div>Выберите чат слева, чтобы начать разговор</div>
+                <div style="font-size:12px;">Или напишите боту команду <code style="background:var(--surface-2);padding:2px 6px;border-radius:5px;color:var(--amber);">!загадка</code></div>
+            </div>
+
+            <div class="messages-area" id="messagesArea" style="display:none;"></div>
+
+            <div class="reply-bar" id="replyBar">
+                <div class="rb-text">Ответ на <b id="replyToName"></b>: <span id="replyToText"></span></div>
+                <button id="cancelReplyBtn">✕</button>
+            </div>
+
+            <div class="hint-bar" id="hintBar" style="display:none;">
+                Команда <code>!загадка</code> запускает новую загадку в этом чате. Отвечайте на любое сообщение через «Ответить».
+            </div>
+
+            <div class="input-area" id="inputArea" style="display:none;">
+                <input type="text" id="messageInput" placeholder="Напишите сообщение или !загадка" autocomplete="off">
+                <button id="sendBtn">➤</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===== МОДАЛКА: НОВЫЙ ЧАТ ===== -->
+    <div class="modal-overlay" id="newChatModal">
+        <div class="modal-box">
+            <h3>Личный чат с пользователем</h3>
+            <input type="email" id="newChatEmail" placeholder="Email пользователя">
+            <div class="modal-msg" id="newChatMsg"></div>
+            <div class="modal-actions">
+                <button class="cancel" id="newChatCancel">Отмена</button>
+                <button class="confirm" id="newChatConfirm">Открыть чат</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (модульный, v10) -->
+    <script type="module" src="{{ url_for('static', filename='js/firebase-config.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
