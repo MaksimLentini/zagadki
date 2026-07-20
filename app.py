@@ -53,7 +53,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # ===== CONFIGURATION =====
-DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
+DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY") "8d6033c37f1d957f9c59e28eb13cea3e"
 DEEPSEEK_API_URL = os.environ.get("DEEPSEEK_API_URL", "https://arizona-ai.ru/api/v1/chat/completions")
 
 # Firebase config для безопасной передачи клиенту (без критичных данных)
